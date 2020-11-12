@@ -1,0 +1,45 @@
+{
+  "name": "FortiGate",
+  "version": "1.0",
+  "author": "Saga",
+  "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
+  "license": "AGPL-V3",
+  "description": "Block an IP on a host via FortiGate",
+  "dataTypeList": ["thehive:case", "thehive:case_artifact"],
+  "command": "FortiGate/fortigate.py",
+  "baseConfig": "FortiGate",
+  "configurationItems": [
+    {
+      "name": "fortigate_ip",
+      "description": "URL for FortiGate",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "1.1.1.1"
+    },
+    {
+      "name": "fortigate_port",
+      "description": "Port for FortiGate",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "4343"
+    },
+    {
+      "name": "fortigate_api",
+      "description": "API for FortiGate",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+	{
+      "name": "fortigate_addrgrp",
+      "description": "Address group for blocking",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "auto_blocked"
+    }
+  ]
+}
