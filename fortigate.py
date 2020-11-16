@@ -33,7 +33,7 @@ class FortiGate(Responder):
 
 
        #add adress to fortigate
-	   r = requests.put(("https://" + fortigate_ip + ":" + fortigate_port + payload + ip_to_block + "?access_token=" + fortigate_api), verify=False, data=body)
+	   r = requests.put(("https://" + fortigate_ip + ":" + fortigate_port + payload + "HIVE" + ip_to_block + "?access_token=" + fortigate_api), verify=False, data=body)
 
        #read adresses in address group
        r2 = requests.get(("https://" + fortigate_ip + ":" + fortigate_port + payload + addrgrp + "?access_token=" + fortigate_api), verify=False)
