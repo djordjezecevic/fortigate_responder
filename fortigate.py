@@ -28,21 +28,19 @@ class FortiGate(Responder):
         payload = "/api/v2/cmdb/firewall/address/"
         payload2 = "/api/v2/cmdb/firewall/addrgrp/"
 
-        ip_to_block = self.observable
-        addrgrp = self.fortigate_addgrp
-        body = "{ 'name':'" + ip_to_block + "','subnet':'"+  ip_to_block +" '255.255.255.255'}"
+        body = "{ 'name':'" + "HIVE" + self.observable + "','subnet':'"+  self.observable +" '255.255.255.255'}"
 
 
         #add adress to fortigate
-        r = requests.put(("https://" + fortigate_ip + ":" + fortigate_port + payload + "HIVE" + ip_to_block + "?access_token=" + fortigate_api), verify=False, data=body)
+        r = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload + "HIVE" + self.observable + "?access_token=" + fortigate_api), verify=False, data=body)
 
         #read adresses in address group
-        r2 = requests.get(("https://" + fortigate_ip + ":" + fortigate_port + payload + addrgrp + "?access_token=" + fortigate_api), verify=False)
+        r2 = requests.get(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload + self.fortigate_addgrpaddrgrp + "?access_token=" + fortigate_api), verify=False)
 
         body3 = r2['results'][0]['member']
-        body3.append({"name": ip_to_block, "q_origin_key": ip_to_block })
+        body3.append({"name":  "HIVE" + self.observable, "q_origin_key":  "HIVE" + self.observable })
         #Modify group to add old + new addresses
-        r3 = requests.put(("https://" + fortigate_ip + ":" + fortigate_port + payload + addrgrp + "?access_token=" + fortigate_api), verify=False, data=body3)
+        r3 = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload + self.fortigate_addgrpaddrgrp + "?access_token=" + fortigate_api), verify=False, data=body3)
 
         if r.status_code == 200 and r2.status_code == 200 and r3.status_code == 200:
             self.report({'message': "Added DROP rule for " + self.observable  })
