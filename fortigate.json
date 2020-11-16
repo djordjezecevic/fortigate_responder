@@ -1,13 +1,13 @@
 {
-  "name": "FortiGate",
+  "name": "fortigate_responder",
   "version": "1.0",
   "author": "Saga",
-  "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
+  "url": "https://github.com/djordjezecevic/fortigate_responder",
   "license": "AGPL-V3",
   "description": "Block an IP on a host via FortiGate",
   "dataTypeList": ["thehive:case", "thehive:case_artifact"],
   "command": "FortiGate/fortigate.py",
-  "baseConfig": "FortiGate",
+  "baseConfig": "fortigate_responder",
   "configurationItems": [
     {
       "name": "fortigate_ip",
