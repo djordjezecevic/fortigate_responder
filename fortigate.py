@@ -8,9 +8,9 @@ class FortiGate(Responder):
         self.fortigate_ip = self.get_param('config.fortigate_ip', None, 'https://localhost')
         self.fortigate_port = self.get_param('config.fortigate_port', None, 'Port missing!')
         self.fortigate_api = self.get_param('config.fortigate_api', None, 'API missing!')
+        self.fortigate_addgrp = self.get_param('config.fortigate_addrgrp', None, "Address group is required !")
         self.observable = self.get_param('data.data', None, "Data is empty")
         self.observable_type = self.get_param('data.dataType', None, "Data type is empty")
-        self.fortigate_addgrp = self.get_param('data.dataType', None, "Address group is required !")
 
     def run(self):
         Responder.run(self)
