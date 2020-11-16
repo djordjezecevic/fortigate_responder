@@ -28,7 +28,7 @@ class FortiGate(Responder):
         payload = "/api/v2/cmdb/firewall/address/"
         payload2 = "/api/v2/cmdb/firewall/addrgrp/"
 
-        body = "{ 'name':'" + "HIVE" + self.observable + "','subnet':'"+  self.observable +" '255.255.255.255'}"
+        body = { 'name':"HIVE" + self.observable ,'subnet':self.observable + " 255.255.255.255" }
 
 
         #add adress to fortigate
@@ -46,7 +46,7 @@ class FortiGate(Responder):
         if r.status_code == 200:
             self.report({'message': "Added DROP rule for " + self.observable  })
         else:
-            self.error({'success': false, 'errorMessage' :"Doslo je do greske r1" })
+            self.error({'success': "false", 'errorMessage' :"Doslo je do greske r1"+r.status_code })
 
     def operations(self, raw):
         return [self.build_operation('AddTagToCase', tag='Fortigate: Blocked IP')]
