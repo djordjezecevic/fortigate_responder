@@ -6,7 +6,7 @@
   "license": "AGPL-V3",
   "description": "Block an IP on a host via FortiGate",
   "dataTypeList": ["thehive:case", "thehive:case_artifact"],
-  "command": "FortiGate/fortigate.py",
+  "command": "fortigate_responder/fortigate.py",
   "baseConfig": "fortigate_responder",
   "configurationItems": [
     {
