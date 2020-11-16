@@ -46,7 +46,7 @@ class FortiGate(Responder):
         if r.status_code == 200 and r2.status_code == 200 and r3.status_code == 200:
             self.report({'message': "Added DROP rule for " + self.observable  })
         else:
-            self.error({'success': false, 'errorMessage:'Doslo je do greske r1' })
+            self.error({'success': false, 'errorMessage' :"Doslo je do greske r1" })
 
     def operations(self, raw):
         return [self.build_operation('AddTagToCase', tag='Fortigate: Blocked IP')]
