@@ -52,4 +52,4 @@ class FortiGate(Responder):
         return [self.build_operation('AddTagToCase', tag='Fortigate: Blocked IP')]
 
 if __name__ == '__main__':
-    Fortigate().run()
+    FortiGate().run()
