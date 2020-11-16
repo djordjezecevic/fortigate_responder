@@ -23,31 +23,31 @@ class FortiGate(Responder):
                self.error({'message': "Not a valid IPv4/IPv6 address!"})
        else:
            self.error({'message': "Not a valid IPv4/IPv6 address!"})
-		   
+
        payload = "/api/v2/cmdb/firewall/address/"
        payload2 = "/api/v2/cmdb/firewall/addrgrp/"
-       
+
 	   ip_to_block = self.observable
        addrgrp = self.fortigate_addgrp
        body = "{ 'name':'" + ip_to_block + "','subnet':'"+  ip_to_block +" '255.255.255.255'}"
-       
-	   
+
+
        #add adress to fortigate
 	   r = requests.put(("https://" + fortigate_ip + ":" + fortigate_port + payload + ip_to_block + "?access_token=" + fortigate_api), verify=False, data=body)
-       
+
        #read adresses in address group
        r2 = requests.get(("https://" + fortigate_ip + ":" + fortigate_port + payload + addrgrp + "?access_token=" + fortigate_api), verify=False)
-       
+
        body3 = r2['results'][0]['member']
        body3.append({"name": ip_to_block, "q_origin_key": ip_to_block })
        #Modify group to add old + new addresses
        r3 = requests.put(("https://" + fortigate_ip + ":" + fortigate_port + payload + addrgrp + "?access_token=" + fortigate_api), verify=False, data=body3)
-       
-	   if r.status_code == 200:
+
+	   if r.status_code == 200 and r2.status_code == 200 and r3.status_code == 200:
            self.report({'message': "Added DROP rule for " + self.observable  })
-       
+
 	   else:
-           self.error(r.status_code)
+           self.error({'success': false,'errorMessage:'Doslo je do greske r1' })
 
    def operations(self, raw):
       return [self.build_operation('AddTagToCase', tag='Fortigate: Blocked IP')]
