@@ -32,7 +32,7 @@ class FortiGate(Responder):
 
 
         #add adress to fortigate
-        r = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload + "?access_token=" + self.fortigate_api), verify=False, data=json.dumps(body))
+        r = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload + "?access_token=" + self.fortigate_api), verify="fortigate_responder/certca.pem", data=json.dumps(body))
 
         #read adresses in address group
         #r2 = requests.get(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload2 + self.fortigate_addgrp + "?access_token=" + self.fortigate_api), verify=False)
