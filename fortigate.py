@@ -33,18 +33,18 @@ class FortiGate(Responder):
 
 
             #add adress to fortigate
-            r = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload + "?access_token=" + self.fortigate_api), verify="fortigate_responder/certca.pem", data=json.dumps(body))
+            r = requests.post(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload + "?access_token=" + self.fortigate_api), verify="fortigate_responder/certca.pem", data=json.dumps(body))
 
             #read adresses in address group
-            #r2 = requests.get(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload2 + self.fortigate_addgrp + "?access_token=" + self.fortigate_api), verify=False)
+            r2 = requests.get(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload2 + self.fortigate_addgrp + "?access_token=" + self.fortigate_api), verify="fortigate_responder/certca.pem")
 
-            #body3 = r2['results'][0]['member']
-            #body3.append({"name":  "HIVE" + self.observable, "q_origin_key":  "HIVE" + self.observable })
+            body3 = r2['results'][0]['member']
+            body3.append({"name":  "HIVE" + self.observable, "q_origin_key":  "HIVE" + self.observable })
             #Modify group to add old + new addresses
-            #r3 = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload2 + self.fortigate_addgrp + "?access_token=" + self.fortigate_api), verify=False, data=body3)
+            r3 = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload2 + self.fortigate_addgrp + "?access_token=" + self.fortigate_api), verify="fortigate_responder/certca.pem", data=body3)
 
-            #if r.status_code == 200 and r2.status_code == 200 and r3.status_code == 200:
-            if r.status_code == 200:
+            if r.status_code == 200 and r2.status_code == 200 and r3.status_code == 200:
+            #if r.status_code == 200:
                 self.report({'message': "Added DROP rule for " + self.observable  })
             else:
                 self.error({'success': "false", 'errorMessage' :"Doslo je do greske r1" + str(r.status_code) })
