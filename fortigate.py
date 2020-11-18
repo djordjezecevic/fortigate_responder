@@ -2,6 +2,7 @@
 from cortexutils.responder import Responder
 import requests
 import ipaddress, json
+import sys
 
 class FortiGate(Responder):
     def __init__(self):
