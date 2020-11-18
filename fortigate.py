@@ -41,7 +41,7 @@ class FortiGate(Responder):
             body3 = r2['results'][0]['member']
             body3.append({"name":  "HIVE" + self.observable, "q_origin_key":  "HIVE" + self.observable })
             #Modify group to add old + new addresses
-            r3 = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload2 + self.fortigate_addgrp + "?access_token=" + self.fortigate_api), verify="fortigate_responder/certca.pem", data=body3)
+            r3 = requests.put(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload2 + self.fortigate_addgrp + "?access_token=" + self.fortigate_api), verify="fortigate_responder/certca.pem", data=json.dumps(body3))
 
             if r.status_code == 200 and r2.status_code == 200 and r3.status_code == 200:
             #if r.status_code == 200:
