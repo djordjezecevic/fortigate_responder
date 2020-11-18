@@ -49,6 +49,8 @@ class FortiGate(Responder):
                 self.report({'message': "Added DROP rule for " + self.observable  })
             else:
                 self.error("Doslo je do greske r1" + str(r.status_code))
+        except OSError as err:
+            self.error("OS error: {0}".format(err))
         except:
             self.error("Program pukao", sys.exc_info()[0])
 
