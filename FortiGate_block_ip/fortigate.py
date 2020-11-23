@@ -13,7 +13,7 @@ class FortiGate(Responder):
         self.fortigate_addgrp = self.get_param('config.fortigate_addrgrp', None, "Address group is required !")
         self.observable = self.get_param('data.data', None, "Data is empty")
         self.observable_type = self.get_param('data.dataType', None, "Data type is empty")
-        self.ca_path = "fortigate_responder/certca.crt"
+        self.ca_path = self.get_param('config.fortigate_cert', None, 'Path to cert')        
         logging.basicConfig(filename='/tmp/app.log', level=logging.DEBUG)
     def run(self):
         try:
@@ -33,7 +33,7 @@ class FortiGate(Responder):
             payload2 = "/api/v2/cmdb/firewall/addrgrp/"
             self.adr_name = "HIVE" + self.observable
             body = { 'name':self.adr_name ,'subnet':self.observable + " 255.255.255.255" }
-
+            
             try:
                 #check if address exist in fortigate
                 r = requests.get(("https://" + self.fortigate_ip + ":" + self.fortigate_port + payload + self.adr_name +"?access_token=" + self.fortigate_api),verify=self.ca_path)
@@ -49,7 +49,7 @@ class FortiGate(Responder):
                         logging.info("Address "  + self.adr_name + " added to fortigate ")
                 except requests.exceptions.RequestException as e:
                     logging.error("r1 " + e)
-
+            
             #read adresses in address group
             logging.info("Reading addreses from adressgroup")
             try:

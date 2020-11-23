@@ -1,13 +1,13 @@
 {
-  "name": "fortigate_responder",
+  "name": "fortigate_block_IP",
   "version": "1.0",
   "author": "Saga",
   "url": "https://github.com/djordjezecevic/fortigate_responder",
   "license": "AGPL-V3",
   "description": "Block an IP on a host via FortiGate",
   "dataTypeList": ["thehive:case", "thehive:case_artifact"],
-  "command": "fortigate_responder/fortigate.py",
-  "baseConfig": "fortigate_responder",
+  "command": "FortiGate_block_ip/fortigate.py",
+  "baseConfig": "FortiGate_block_ip",
   "configurationItems": [
     {
       "name": "fortigate_ip",
@@ -36,6 +36,14 @@
 	{
       "name": "fortigate_addrgrp",
       "description": "Address group for blocking",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "auto_blocked"
+    },
+	{
+      "name": "fortigate_cert",
+      "description": "Path to FortiGate CA Certificate",
       "type": "string",
       "multi": false,
       "required": true,

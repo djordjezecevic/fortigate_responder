@@ -1,0 +1,56 @@
+{
+  "name": "fortigate_allow_ip",
+  "version": "1.0",
+  "author": "Saga",
+  "url": "https://github.com/djordjezecevic/fortigate_responder",
+  "license": "AGPL-V3",
+  "description": "Remove an IP from FortiGate blacklist",
+  "dataTypeList": ["thehive:case", "thehive:case_artifact"],
+  "command": "FortiGate_allow_ip/fortigate.py",
+  "baseConfig": "FortiGate_allow_ip",
+  "configurationItems": [
+    {
+      "name": "fortigate_ip",
+      "description": "URL for FortiGate",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "1.1.1.1"
+    },
+    {
+      "name": "fortigate_port",
+      "description": "Port for FortiGate",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "4343"
+    },
+    {
+      "name": "fortigate_api",
+      "description": "API for FortiGate",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+	{
+      "name": "fortigate_addrgrp",
+      "description": "Address group for blocked IP",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "auto_blocked"
+    },
+
+        {
+      "name": "fortigate_cert",
+      "description": "Path to FortiGate CA Certificate",
+      "type": "string",
+      "multi": false,
+      "required": true,
+      "defaultValue": "auto_blocked"
+    }
+
+
+  ]
+}
